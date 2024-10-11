@@ -1,0 +1,6 @@
+pygame
+PyQt5
+tensorflow
+keras
+keras-rl2
+numpy

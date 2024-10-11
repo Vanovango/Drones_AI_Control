@@ -14,7 +14,7 @@ class Drone:
         """
         initialize main characteristics
         """
-        self.radius = 200
+        self.retransmission_radius = 200
         self.speed = 20
 
     def move(self, action, object_rect):

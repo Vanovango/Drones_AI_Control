@@ -16,20 +16,27 @@ class Game:
         self.HIGH = 720
         self.FPS = 60
 
+        self.window = pg.display.set_mode((self.WIDTH, self.HIGH))
+        self.clock = pg.time.Clock()
+
     def draw_all(self):
         """
         drawing all objects
         """
-        window = pg.display.set_mode((self.WIDTH, self.HIGH))
-        clock = pg.time.Clock()
 
-        window.fill(pg.Color('black'))
+        self.window.fill(pg.Color('black'))
 
+        self.draw_cursor(self.window)
 
-        self.draw_cursor(window)
+        # draw rectangles for test agent movement
+        pg.draw.rect(self.window, (0, 255, 0), (100, 100, 50, 50))  # x, y, w, h
+        pg.draw.rect(self.window, (0, 255, 0), (600, 600, 50, 50))
+        pg.draw.rect(self.window, (0, 255, 0), (600, 100, 50, 50))
+        pg.draw.rect(self.window, (0, 255, 0), (100, 600, 50, 50))
+        pg.draw.rect(self.window, (0, 255, 0), (1200, 300, 50, 50))
 
         pg.display.update()
-        clock.tick(self.FPS)
+        self.clock.tick(self.FPS)
 
     @staticmethod
     def draw_cursor(window):
