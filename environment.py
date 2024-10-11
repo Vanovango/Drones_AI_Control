@@ -1,4 +1,6 @@
-# this file is responsible for change environ statement
+"""
+this file is responsible for change environ statement
+"""
 
 import pygame as pg
 from drones import *
@@ -23,6 +25,7 @@ class Game:
 
         window.fill(pg.Color('black'))
 
+
         self.draw_cursor(window)
 
         pg.display.update()
@@ -30,6 +33,11 @@ class Game:
 
     @staticmethod
     def draw_cursor(window):
+        """
+        draw cursor on the selected window
+        :param window:
+        :return: None
+        """
         pg.mouse.set_visible(False)
         cursor_pos = pg.mouse.get_pos()
         pg.draw.line(window, (255, 0, 0),
@@ -40,6 +48,10 @@ class Game:
                      (cursor_pos[0] + 10, cursor_pos[1] - 10))
 
     def start_game(self):
+        """
+        def for start environment
+        :return: None
+        """
 
         while True:
             self.draw_all()

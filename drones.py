@@ -1,4 +1,6 @@
-# this file is responsible for the movement of drones depending on the selected action
+"""
+this file is responsible for the movement of drones depending on the selected action
+"""
 
 import pygame as pg
 
