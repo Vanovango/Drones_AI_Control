@@ -4,3 +4,4 @@ tensorflow
 keras
 keras-rl2
 numpy
+gym
