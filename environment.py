@@ -2,8 +2,8 @@
 this file is responsible for change environ statement
 """
 
-import pygame as pg
 from drones import *
+import pygame as pg
 
 
 class Game:
@@ -19,6 +19,8 @@ class Game:
         self.window = pg.display.set_mode((self.WIDTH, self.HIGH))
         self.clock = pg.time.Clock()
 
+        self.master = Master()
+
     def draw_all(self):
         """
         drawing all objects
@@ -29,11 +31,16 @@ class Game:
         self.draw_cursor(self.window)
 
         # draw rectangles for test agent movement
-        pg.draw.rect(self.window, (0, 255, 0), (100, 100, 50, 50))  # x, y, w, h
-        pg.draw.rect(self.window, (0, 255, 0), (600, 600, 50, 50))
-        pg.draw.rect(self.window, (0, 255, 0), (600, 100, 50, 50))
-        pg.draw.rect(self.window, (0, 255, 0), (100, 600, 50, 50))
-        pg.draw.rect(self.window, (0, 255, 0), (1200, 300, 50, 50))
+        rect_W = 30
+        rect_H = 30
+
+        pg.draw.rect(self.window, (0, 255, 0), (100, 100, rect_W, rect_H))  # x, y, w, h
+        pg.draw.rect(self.window, (0, 255, 0), (600, 600, rect_W, rect_H))
+        pg.draw.rect(self.window, (0, 255, 0), (600, 100, rect_W, rect_H))
+        pg.draw.rect(self.window, (0, 255, 0), (100, 600, rect_W, rect_H))
+        pg.draw.rect(self.window, (0, 255, 0), (1200, 300, rect_W, rect_H))
+
+        self.master.draw(self.window)
 
         pg.display.update()
         self.clock.tick(self.FPS)

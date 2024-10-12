@@ -17,6 +17,12 @@ class Drone:
         self.retransmission_radius = 200
         self.speed = 20
 
+        # global DRONE, DRONES_RECT
+        self.DRONES = {'master': {}, 'slave': {}}
+        self.DRONES_RECT = {'master': {}, 'slave': {}}
+        self.last_master_id = 1
+        self.last_slave_id = 1
+
     def move(self, action, object_rect):
         """
         move drone by given action
@@ -35,11 +41,13 @@ class Drone:
 
     def draw(self, window):
         """
-        draw drone after given action
+        draw drones on selected area
         :param window: window there drone will be drawn
         :return: new frame on drawing window
         """
-        pass
+        window.blit(self.DRONES['master'][1], self.DRONES_RECT['master'][1])  # draw DRONES
+        pg.draw.circle(window, pg.Color('blue'),
+                       self.DRONES_RECT['master'][1].center, self.retransmission_radius, 2)  # draw circle around DRONES
 
 
 class Master(Drone):
@@ -49,9 +57,19 @@ class Master(Drone):
 
     def __init__(self):
         super().__init__()
-        self.icon = pg.image.load('./img/MASTER_drone.png')
+        self.icon = pg.image.load('./images/MASTER_drone.png')
         # generate master position on center of game window
-        self.master_drone = self.icon.get_rect(centerx=640, centraly=360)
+
+        self.DRONES['master'] = {
+            self.last_master_id: self.icon
+        }
+
+        # TODO add settings to generate drones positions
+        self.DRONES_RECT['master'] = {
+            self.last_master_id: self.DRONES['master'][1].get_rect(centerx=640, centery=360)
+        }
+
+        self.last_master_id += 1
 
 
 class Slave(Drone):
