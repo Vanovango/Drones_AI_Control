@@ -14,10 +14,10 @@ import numpy as np
 class Env(gym.Env):
     metadata = {"render_modes": ["human"], "render_fps": 30}
 
-    def __init__(self, current_state, observation_state, drone_id):
+    def __init__(self, observation_state, drone_id):
         """
         Инициализация основных переменных и параметров
-        :param current_state: состояние (координаты) конкретного дрона
+        :param drone_id: номер дрона
         :param observation_state: состояние (координаты) всех дронов
         """
         super().__init__()
@@ -30,7 +30,6 @@ class Env(gym.Env):
         # high - верхняя граница возможного диапазона
         # print(observation_space) -->  Box(low, high, shape, dtype)
 
-        self.current_state = current_state
         self.observation_state = observation_state
         self.drone_id = drone_id
 

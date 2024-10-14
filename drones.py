@@ -3,6 +3,7 @@ this file is responsible for the movement of drones depending on the selected ac
 """
 
 import pygame as pg
+from RL import Env
 
 
 class Drone:
@@ -23,22 +24,26 @@ class Drone:
         self.last_master_id = 1
         self.last_slave_id = 1
 
-    def move(self, action, object_rect):
+    def move(self, action, object_rect, drone_id):
         """
         move drone by given action
         :param action: chose movement direction
         :param object_rect: rect of drone witch must move
         :return: just move drone by given action
         """
+        env = Env(self.DRONES_RECT, id)
         # dict of possible actions for drone movement
         actions = {
-            'up': object_rect.move_ip(0, -self.speed),
-            'down': object_rect.move_ip(0, +self.speed),
-            'left': object_rect.move_ip(-self.speed, 0),
-            'right': object_rect.move_ip(+self.speed, 0),
-            'stay': object_rect.move_ip(0, 0)
+            0: object_rect.move_ip(0, -self.speed),     # up
+            1: object_rect.move_ip(0, +self.speed),     # down
+            2: object_rect.move_ip(-self.speed, 0),     # left
+            3: object_rect.move_ip(+self.speed, 0),     # right
+            4: object_rect.move_ip(0, 0)                # stay
         }
-        return actions[action]
+
+        reward = env.step(action)
+
+        return actions[action], reward
 
     def draw(self, window):
         """
