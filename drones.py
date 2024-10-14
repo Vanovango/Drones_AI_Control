@@ -35,7 +35,8 @@ class Drone:
             'up': object_rect.move_ip(0, -self.speed),
             'down': object_rect.move_ip(0, +self.speed),
             'left': object_rect.move_ip(-self.speed, 0),
-            'right': object_rect.move_ip(+self.speed, 0)
+            'right': object_rect.move_ip(+self.speed, 0),
+            'stay': object_rect.move_ip(0, 0)
         }
         return actions[action]
 
