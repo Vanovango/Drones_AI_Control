@@ -3,7 +3,7 @@
 действия влекут за собой награду
 Исходя из суммарных наград за эпизод агент начинает делать выводы
 
-Но как из этого мне прийти к мультиагентному обучению 
+Но как из этого мне прийти к мультиагентному обучению
 А конкретнее к кооперации моих дронов для достижения общей цели - поддержание построения
 """
 import gym
@@ -18,7 +18,7 @@ class Env(gym.Env):
         """
         Инициализация основных переменных и параметров
         :param drone_id: номер дрона
-        :param observation_state: состояние (координаты) всех дронов
+        :param observation_state: состояние (координаты) всех дронов = DRONES_RECT
         """
         super().__init__()
         # Define action and observation space
@@ -39,13 +39,15 @@ class Env(gym.Env):
         :param action: выбранное действие [0,1,2,3,4]
         :return: награда, новое состояние среды
         """
-        # actions = {
-        #     0'up': object_rect.move_ip(0, -self.speed),
-        #     1'down': object_rect.move_ip(0, +self.speed),
-        #     2'left': object_rect.move_ip(-self.speed, 0),
-        #     3'right': object_rect.move_ip(+self.speed, 0),
-        #     4'stay': object_rect.move_ip(0, 0)
-        # }
+
+        actions = {
+            0: self.observation_state.move_ip(0, -self.speed),
+            1: self.observation_state.move_ip(0, +self.speed),
+            2: self.observation_state.move_ip(-self.speed, 0),
+            3: self.observation_state.move_ip(+self.speed, 0),
+            4: self.observation_state.move_ip(0, 0)
+        }
+
         return observation, reward, terminated, truncated, info
 
     def reset(self, seed=None, options=None):

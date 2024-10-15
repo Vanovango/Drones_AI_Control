@@ -19,8 +19,8 @@ class Drone:
         self.speed = 20
 
         # global DRONE, DRONES_RECT
-        self.DRONES = {'master': {}, 'slave': {}}
-        self.DRONES_RECT = {'master': {}, 'slave': {}}
+        self.DRONES = {'master': {}, 'slave': {}}       # хранение ссылок на созданные объекты
+        self.DRONES_RECT = {'master': {}, 'slave': {}}  # хранение объектов в виде "прямоугольника"
         self.last_master_id = 1
         self.last_slave_id = 1
 
@@ -29,19 +29,13 @@ class Drone:
         move drone by given action
         :param action: chose movement direction
         :param object_rect: rect of drone witch must move
+        :param drone_id: id of current drone
         :return: just move drone by given action
         """
-        env = Env(self.DRONES_RECT, id)
+        env = Env(self.DRONES_RECT, drone_id)
         # dict of possible actions for drone movement
-        actions = {
-            0: object_rect.move_ip(0, -self.speed),     # up
-            1: object_rect.move_ip(0, +self.speed),     # down
-            2: object_rect.move_ip(-self.speed, 0),     # left
-            3: object_rect.move_ip(+self.speed, 0),     # right
-            4: object_rect.move_ip(0, 0)                # stay
-        }
 
-        reward = env.step(action)
+        self.DRONES_RECT, reward, is_done = env.step(action)
 
         return actions[action], reward
 
