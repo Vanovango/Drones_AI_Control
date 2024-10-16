@@ -33,7 +33,6 @@ class Drone:
         :return: just move drone by given action
         """
         env = Env(self.DRONES_RECT, drone_id)
-        # dict of possible actions for drone movement
 
         self.DRONES_RECT, reward, is_done = env.step(action)
 
